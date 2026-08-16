@@ -27,6 +27,32 @@ def _app_dir() -> Path:
     return Path(__file__).resolve().parent
 
 
+def _icon_path() -> Path | None:
+    """App icon: next to the script in dev, or unpacked next to the frozen exe data."""
+    candidates = [
+        _app_dir() / "assets" / "DeathTracker.ico",
+        _app_dir() / "DeathTracker.ico",
+    ]
+    if getattr(sys, "frozen", False):
+        meipass = getattr(sys, "_MEIPASS", None)
+        if meipass:
+            candidates.insert(0, Path(meipass) / "DeathTracker.ico")
+    for p in candidates:
+        if p.is_file():
+            return p
+    return None
+
+
+def _apply_icon(win: tk.Misc) -> None:
+    path = _icon_path()
+    if path is None:
+        return
+    try:
+        win.iconbitmap(default=str(path))
+    except tk.TclError:
+        pass
+
+
 DATA_FILE = _app_dir() / "deaths.json"
 ERROR_LOG = _app_dir() / "death_tracker_error.txt"
 HOTKEY_LOG = _app_dir() / "hotkey_status.txt"
@@ -507,6 +533,7 @@ class DeathTracker(tk.Tk):
         self._hotkeys = HotkeyThread(self)
 
         self.title("Death Tracker")
+        _apply_icon(self)
         self.overrideredirect(True)
         self.attributes("-topmost", True)
         self.configure(bg=TRANS, bd=0, highlightthickness=0)
@@ -1079,6 +1106,7 @@ class SettingsWindow(tk.Toplevel):
         self._preset_target = tk.StringVar(value="counter")  # or "suck"
 
         self.title("Electro's death tracker")
+        _apply_icon(self)
         self.configure(bg=BG)
         self.resizable(False, False)
         self.attributes("-topmost", True)

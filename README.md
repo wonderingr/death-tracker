@@ -20,7 +20,14 @@ In settings you can change colors, the +1 popup text (default `I SUCK`), and **f
 
 ## Run it
 
-**Easiest:** grab `DeathTracker.exe` from [Releases](https://github.com/wonderingr/death-tracker/releases).
+**Easiest:** download **DeathTracker.zip** from [Releases](https://github.com/wonderingr/death-tracker/releases), unzip it, run `DeathTracker.exe`.
+
+Keep everything in that folder. Your save and logs live next to the exe:
+- `deaths.json` — count / colors / position
+- `hotkey_status.txt` — whether hotkeys registered
+- `death_tracker_error.txt` — only if something crashes
+
+Windows Defender / SmartScreen may warn once (the app isn’t code-signed). That’s normal for small open-source tools. More info → Run anyway if you trust the download.
 
 Or from source (Windows + Python 3.10+):
 
@@ -35,8 +42,6 @@ Then double-click `Start Death Tracker.bat`, or:
 ```bat
 pyw death_tracker.py
 ```
-
-Saves to `deaths.json` next to the app.
 
 ## License
 

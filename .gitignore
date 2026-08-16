@@ -16,6 +16,7 @@ hotkey_status.txt
 # Build artifacts (PyInstaller etc.)
 build/
 dist/
+release/
 *.spec
 *.exe
 
