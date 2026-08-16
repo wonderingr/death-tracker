@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Personal / runtime data
+deaths.json
+death_tracker_error.txt
+hotkey_status.txt
+*.log
+
+# Build artifacts (PyInstaller etc.)
+build/
+dist/
+*.spec
+*.exe
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
